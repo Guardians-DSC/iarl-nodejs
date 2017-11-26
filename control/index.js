@@ -16,9 +16,14 @@ module.exports = function(app) {
                 };
 
                 client(connectionSettings, function(list){
+                    console.log(list);
                     res.render('index', {list: list, user: req.session.user});
                 });
             }
+        },
+        logout: function(req, res){
+            req.session.destroy();
+            res.redirect('/login');
         }
     }
  
