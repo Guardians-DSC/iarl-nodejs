@@ -1,5 +1,15 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div(class="row")
+    div(class="col-md-12" id="title")
+      h1= title
+      p Welcome to #{title} project
+  
+  div(class="row")
+    div(class="col-md-2" id="login" role="form")
+      form(action="/index", method="post")
+        input(type="text" class="form-control" name="username" placeholder="Username")
+        input(type="password" class="form-control" name="password" placeholder="Password")
+
+        button(class="btn btn-primary btn-sm" type="submit") Login

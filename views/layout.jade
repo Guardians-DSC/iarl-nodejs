@@ -1,7 +1,16 @@
 doctype html
 html
   head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UACompatible' content='IE=edge')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/style.css')
   body
-    block content
+    div(class='container')
+      include partials/navbar
+      block content
+
+    script(scr='/bower_components/jquery/dist/jquery.min.js')
+    scritp(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')

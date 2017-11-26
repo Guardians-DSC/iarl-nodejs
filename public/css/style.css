@@ -1,8 +1,20 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+#title {
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgb(206, 213, 216);
+}
+
+#login input {
+  margin-bottom: 8px;
+}
+
+#login button {
+  margin-top: 10px;
 }
