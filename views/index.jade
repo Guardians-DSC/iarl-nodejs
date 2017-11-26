@@ -7,9 +7,14 @@ block content
       p Welcome to #{title} project
   
   div(class="row")
-    div(class="col-md-2" id="login" role="form")
-      form(action="/index", method="post")
+    div(class="col-md-2" id="login")
+      form(action="/", method="POST")
         input(type="text" class="form-control" name="username" placeholder="Username")
         input(type="password" class="form-control" name="password" placeholder="Password")
 
         button(class="btn btn-primary btn-sm" type="submit") Login
+
+    div(class="col-md-10")
+      each l, i in list
+        if l.filename[0] != '.'
+          p #{l.filename}
