@@ -1,4 +1,4 @@
-const client = require('ssh2').Client;
+const client = require('../aux_modules/ssh');
 
 module.exports = function(app) {
 
@@ -13,24 +13,10 @@ module.exports = function(app) {
                 username: req.body.username, // lcc username
                 password: req.body.password // user password
             };
-            
-            var connection = new client();
-            var remotePathToList = '/home/' + connectionSettings.username;
-            
-            connection.on('ready', function () {
-                connection.sftp(function (err, sftp) {
-                    if (err) throw err;
-            
-                    sftp.readdir(remotePathToList, function (err, list) {
-                    if (err) throw err;
-                    // List the directory in the page
-                    res.render('index', {list: list, title: 'IARL'});
-                    // Do not forget to close the connectionection, otherwise you'll get troubles
-                    connection.end();
-                    });
-                });
-            }).connect(connectionSettings);
 
+            client(connectionSettings, function(list){
+                res.render('index', {list: list, title: 'IARL'});
+            });
         }
     }
  
