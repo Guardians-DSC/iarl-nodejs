@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  
+  div(class="row")
+    div(class="col-md-3 col-md-offset-4" id="login")
+      h3 Login
+      form(action="/login", method="POST")
+        input(type="text" class="form-control" name="username" placeholder="Username")
+        input(type="password" class="form-control" name="password" placeholder="Password")
+        div(class="wrapper")
+          button(class="btn btn-primary btn-md" type="submit") Login
