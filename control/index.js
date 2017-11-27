@@ -1,4 +1,5 @@
 const client = require('../aux_modules/ssh');
+const url = require('url');
 
 module.exports = function(app) {
 
@@ -8,17 +9,24 @@ module.exports = function(app) {
                 res.redirect('/login');
             }
             else {
-                var connectionSettings = {
-                    host: 'chopper.lcc.ufcg.edu.br', // host to connect
-                    port: 23456, // port
-                    username: req.session.user, // lcc username
-                    password: req.session.password // user password
-                };
+                var query = url.parse(req.url, true).query;
+                var labs = require('../public/js/labs.json');
+            
+                if (Object.keys(query).length != 0) {
+                    var connectionSettings = {
+                        host: query.host, // host to connect
+                        port: query.port, // port
+                        username: req.session.user, // lcc username
+                        password: req.session.password // user password
+                    };
 
-                client(connectionSettings, function(list){
-                    console.log(list);
-                    res.render('index', {list: list, user: req.session.user});
-                });
+                    client(connectionSettings, function(list){
+                        res.render('index', {list: list, labs: labs, user: req.session.user});
+                    });
+                }
+                else {
+                    res.render('index', {list: {}, labs: labs, user: req.session.user});
+                }
             }
         },
         logout: function(req, res){

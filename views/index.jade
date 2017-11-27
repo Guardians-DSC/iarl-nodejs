@@ -4,26 +4,31 @@ block content
  
   div(class="row")
     div(class="col-md-2" id="login")
-      h2 #{user}
+      a(href="/" id="username") #{user}
+      ul
+        each i in labs
+          li
+            a(href="/?host=#{i.host}&port=#{i.port}") #{i.nome}
 
     div(class="col-md-10")
-      table(class="table table-striped table-hover table-responsive")
-        thead
-          tr
-            th(width=30)
-            th Nome
-            th Ações
-        each l, i in list
-          if l.filename[0] != '.' && l.longname[0] == 'd'
+      if list.length > 0
+        table(class="table table-striped table-hover table-responsive")
+          thead
             tr
-              td
-                img(src="/images/folder.png", alt="", width="20")
-              td #{l.filename}
-              td
-        each l, i in list
-          if l.filename[0] != '.' && l.longname[0] == '-'
-            tr
-              td
-                img(src="/images/archive.png", alt="", width="20")
-              td #{l.filename}
-              td
+              th(width=30)
+              th Nome
+              th Ações
+          each l, i in list
+            if l.filename[0] != '.' && l.longname[0] == 'd'
+              tr
+                td
+                  img(src="/images/folder.png", alt="", width="20")
+                td #{l.filename}
+                td
+          each l, i in list
+            if l.filename[0] != '.' && l.longname[0] == '-'
+              tr
+                td
+                  img(src="/images/archive.png", alt="", width="20")
+                td #{l.filename}
+                td

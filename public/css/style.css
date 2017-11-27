@@ -19,6 +19,11 @@ a {
   margin-top: 10px;
 }
 
+#username {
+  font-size: 26px;
+  color: gray;
+}
+
 .wrapper {
   text-align: center;
 }
