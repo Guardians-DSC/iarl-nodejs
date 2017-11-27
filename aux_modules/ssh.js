@@ -1,14 +1,17 @@
 const client = require('ssh2').Client;
 
-module.exports = function(connectionSettings, callback) {
+module.exports = function(connectionSettings, userInputPath, callback) {
+
+    console.log('host ', connectionSettings.host);
 
     var connection = new client();
-    var remotePathToList = '/home/' + connectionSettings.username;
+    var path = ['/home', connectionSettings.username];
+    var path = path.concat(userInputPath).join('/');  
 
     connection.on('ready', function () {
         connection.sftp(function (err, sftp) {
             if (err) throw err;
-            sftp.readdir(remotePathToList, function (err, list) {
+            sftp.readdir(path, function (err, list) {
                 if (err) throw err;
                 // Do not forget to close the connectionection, otherwise you'll get troubles
                 connection.end();

@@ -8,15 +8,16 @@ module.exports = function(app) {
         },
         post: function(req, res) {
             var connectionSettings = {
-                host: 'r2d2.lcc.ufcg.edu.br', // host to connect
+                host: 'chopper.lcc.ufcg.edu.br', // host to connect
                 port: 23456, // port
                 username: req.body.username, // lcc username
                 password: req.body.password // user password
             };
 
-            client(connectionSettings, function(list){
+            client(connectionSettings, '', function(list){
                 req.session.user = req.body.username;
                 req.session.password = req.body.password;
+                req.session.path = [];
                 res.redirect('/');
             });
         }

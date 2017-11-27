@@ -13,14 +13,25 @@ module.exports = function(app) {
                 var labs = require('../public/js/labs.json');
             
                 if (Object.keys(query).length != 0) {
+                    if (query.host != undefined && query.port != undefined){
+                        req.session.host = query.host;
+                        req.session.port = query.port;
+                    }
+
                     var connectionSettings = {
-                        host: query.host, // host to connect
-                        port: query.port, // port
+                        host: req.session.host, // host to connect
+                        port: req.session.port, // port
                         username: req.session.user, // lcc username
                         password: req.session.password // user password
                     };
+                    
+                    if (query.path == '..'){
+                        req.session.path.pop();
+                    } else if (query.path != undefined){
+                        req.session.path.push(query.path);
+                    }
 
-                    client(connectionSettings, function(list){
+                    client(connectionSettings, req.session.path, function(list){
                         res.render('index', {list: list, labs: labs, user: req.session.user});
                     });
                 }
