@@ -16,6 +16,7 @@ module.exports = function(app) {
                     if (query.host != undefined && query.port != undefined){
                         req.session.host = query.host;
                         req.session.port = query.port;
+                        req.session.path = [];
                     }
 
                     var connectionSettings = {
@@ -32,11 +33,14 @@ module.exports = function(app) {
                     }
 
                     client(connectionSettings, req.session.path, function(list){
-                        res.render('index', {list: list, labs: labs, user: req.session.user});
+                        res.render('index', {list: list, 
+                                             labs: labs, 
+                                             user: req.session.user, 
+                                             inRoot: req.session.path.length});
                     });
                 }
                 else {
-                    res.render('index', {list: {}, labs: labs, user: req.session.user});
+                    res.render('index', {list: {}, labs: labs, user: req.session.user, inRoot: 0});
                 }
             }
         },

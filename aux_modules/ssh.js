@@ -2,11 +2,9 @@ const client = require('ssh2').Client;
 
 module.exports = function(connectionSettings, userInputPath, callback) {
 
-    console.log('host ', connectionSettings.host);
-
     var connection = new client();
     var path = ['/home', connectionSettings.username];
-    var path = path.concat(userInputPath).join('/');  
+    var path = path.concat(userInputPath).join('/');      
 
     connection.on('ready', function () {
         connection.sftp(function (err, sftp) {

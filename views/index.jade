@@ -18,18 +18,28 @@ block content
               th(width=30)
               th Nome
               th Ações
-          each l, i in list
-            if l.filename[0] != '.' && l.longname[0] == 'd'
+          tbody
+            if (inRoot != 0)
               tr
                 td
                   img(src="/images/folder.png", alt="", width="20")
                 td 
-                  a(href="/?path=#{l.filename}") #{l.filename}
+                  a(href="/?path=..") ..
                 td
-          each l, i in list
-            if l.filename[0] != '.' && l.longname[0] == '-'
-              tr
-                td
-                  img(src="/images/archive.png", alt="", width="20")
-                td #{l.filename}
-                td
+            each l, i in list
+              if l.filename[0] != '.' && l.longname[0] == 'd'
+                tr
+                  td
+                    img(src="/images/folder.png", alt="", width="20")
+                  td 
+                    a(href="/?path=#{l.filename}") #{l.filename}
+                  td
+            each l, i in list
+              if l.filename[0] != '.' && l.longname[0] == '-'
+                tr
+                  td
+                    img(src="/images/archive.png", alt="", width="20")
+                  td #{l.filename}
+                  td
+      else
+        h3 Selecione uma workspace
