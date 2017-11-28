@@ -20,7 +20,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret:'ss3ncr1ptk3yq1n3d4ni3l9iek', resave:false, saveUninitialized:true}));
-load('control').then('routes').into(app);
+
+load('controllers').then('routes').into(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
