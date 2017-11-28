@@ -11,7 +11,7 @@ block content
             a(href="/?host=#{i.host}&port=#{i.port}") #{i.nome}
 
     div(class="col-md-10")
-      if list.length > 0
+      if (list.length > 0 || inRoot > 0)
         table(class="table table-striped table-hover table-responsive")
           thead
             tr
@@ -19,7 +19,7 @@ block content
               th Nome
               th Ações
           tbody
-            if (inRoot != 0)
+            if (inRoot > 0)
               tr
                 td
                   img(src="/images/folder.png", alt="", width="20")
