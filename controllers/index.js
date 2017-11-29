@@ -29,14 +29,19 @@ module.exports = function(app) {
                     if (query.path == '..'){
                         req.session.path.pop();
                     } else if (query.path != undefined){
-                        req.session.path.push(query.path);
+                        req.session.path = query.path.split('/');
                     }
 
-                    client(connectionSettings, req.session.path, function(list){
-                        res.render('index', {list: list, 
+                    if (req.session.path.length > 0){
+                        req.session.path[req.session.path.length - 1] += '/';
+                    }
+
+                    client(connectionSettings, req.session.path, function(list_dir){
+                        res.render('index', {list_dir: list_dir, 
                                              labs: labs, 
                                              user: req.session.user, 
-                                             inRoot: req.session.path.length});
+                                             inRoot: req.session.path.length,
+                                             path: req.session.path.join('/')});
                     });
                 }
                 else {
