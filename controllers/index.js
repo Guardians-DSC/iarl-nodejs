@@ -45,7 +45,7 @@ module.exports = function(app) {
                     });
                 }
                 else {
-                    res.render('index', {list: {}, labs: labs, user: req.session.user, inRoot: 0});
+                    res.render('index', {list_dir: {}, labs: labs, user: req.session.user, inRoot: 0});
                 }
             }
         },
