@@ -11,7 +11,7 @@ var app = express();
 // aplication favicon
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-// (morgan) generate logs of requests
+// generate logs of requests
 app.use(logger('dev'));
 
 // converts the request to JSON
@@ -26,6 +26,11 @@ app.use(session({secret:'ss3ncr1ptk3yq1n3d4ni3l9iek', resave:false, saveUninitia
 
 // load routes
 load('controllers').then('routes').into(app);
+
+// route to handle all angular requests
+app.get('*', function(req, res) {
+  res.sendfile('./views/index.html'); // load our public/index.html file
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -42,7 +47,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json('error');
 });
 
 module.exports = app;

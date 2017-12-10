@@ -1,7 +1,5 @@
 module.exports = function(app) {
     var login = app.controllers.login;
     
-    app.route('/login')
-    .get(login.get)
-    .post(login.post);
+    app.route('/api/login').post(login.post);
 }
