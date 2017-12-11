@@ -36,8 +36,8 @@ app.get('*', function(req, res) {
 app.use(function(err, req, res, next) {
   if (err.message == "All configured authentication methods failed"){
     err.status = 401;
-    next(err);
   }
+  next(err);
 });
 
 // catch 404 and forward to error handler
