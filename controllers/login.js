@@ -13,7 +13,7 @@ module.exports = function(app) {
             };
 
             sftp.connect(connectionSettings)
-            .then(() => {
+            .then(function() {
                 req.session.user = req.body.username;
                 req.session.password = req.body.password;
                 req.session.path = [];
