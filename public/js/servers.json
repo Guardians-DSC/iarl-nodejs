@@ -1,11 +1,11 @@
 [
     {
-        "nome": "lcc1",
+        "name": "lcc1",
         "host": "chopper.lcc.ufcg.edu.br",
         "port": "23456"
     }, 
     {
-        "nome": "lcc2",
+        "name": "lcc2",
         "host": "r2d2.lcc.ufcg.edu.br",
         "port": "23456"
     }
