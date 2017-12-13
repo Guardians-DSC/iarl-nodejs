@@ -3,7 +3,7 @@ const sftp = new Client();
 module.exports = function(app) {
 
     var indexControl = {
-        post: function(req, res, next) {
+        login: function(req, res, next) {
             if (req.body.username == "" || req.body.password == ""){
                 return next(new Error("Invalid JSON"));
             }
@@ -22,6 +22,11 @@ module.exports = function(app) {
                 req.session.path = [];
                 res.status(200).json('Sucessful login')
             }).catch(next);
+        },
+
+        logout: function(req, res) {
+            req.session.destroy();
+            res.status(200).json('User logged out');
         }
     }
  
