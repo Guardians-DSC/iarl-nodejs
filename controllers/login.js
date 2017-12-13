@@ -20,13 +20,13 @@ module.exports = function(app) {
                 req.session.user = req.body.username;
                 req.session.password = req.body.password;
                 req.session.path = [];
-                res.status(200).json('Sucessful login')
+                res.status(200).json({message: 'Sucessful login'})
             }).catch(next);
         },
 
         logout: function(req, res) {
             req.session.destroy();
-            res.status(200).json('User logged out');
+            res.status(200).json({message: 'User logged out'});
         }
     }
  
