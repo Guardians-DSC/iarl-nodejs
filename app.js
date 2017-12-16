@@ -32,6 +32,14 @@ app.get('*', function(req, res) {
   res.sendfile('./views/index.html'); // load our public/index.html file
 });
 
+// catch authentication failed and forward to error handler
+app.use(function(err, req, res, next) {
+  if (err.message == "All configured authentication methods failed"){
+    err.status = 401;
+  }
+  next(err);
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -45,9 +53,9 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // send the error
   res.status(err.status || 500);
-  res.json('error');
+  res.json({message: err.message});
 });
 
 module.exports = app;
