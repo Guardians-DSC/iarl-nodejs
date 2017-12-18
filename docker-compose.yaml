@@ -1,0 +1,11 @@
+version: '2'
+services:
+  web:
+    build: .
+    container_name: "iarl"
+    command: bin/www
+    restart: always
+    volumes:
+      - .:/var/apps/iarl/
+    ports:
+      - 3000:3000
