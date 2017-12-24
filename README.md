@@ -14,3 +14,7 @@ Tem-se como descrição o que se segue:
 * [AngularJS 1.x](https://angularjs.org/)
 * [NodeJS 6.11.3](https://nodejs.org/en/)
 * [Bootstrap v3.3.7](http://getbootstrap.com/docs/3.3/)
+
+### Deploy
+
+Para subir uma instância do IARL, basta possuir Docker e docker-compose instalados e executar o comando `docker-compose up -d`
