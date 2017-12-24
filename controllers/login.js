@@ -3,7 +3,10 @@ const sftp = new Client();
 module.exports = function(app) {
 
     var indexControl = {
-        post: function(req, res, next) {
+        login: function(req, res, next) {
+            if (req.body.username == "" || req.body.password == ""){
+                return next(new Error("Invalid JSON"));
+            }
             // ----- switch to LDAP validation -----
             var connectionSettings = {
                 host: 'chopper.lcc.ufcg.edu.br', // host to connect
@@ -11,7 +14,7 @@ module.exports = function(app) {
                 username: req.body.username, // lcc username
                 password: req.body.password // user password
             };
-
+            
             sftp.connect(connectionSettings)
             .then(function() {
                 req.session.user = req.body.username;
@@ -19,6 +22,11 @@ module.exports = function(app) {
                 req.session.path = [];
                 res.status(200).json('Sucessful login')
             }).catch(next);
+        },
+
+        logout: function(req, res) {
+            req.session.destroy();
+            res.status(200).json('User logged out');
         }
     }
  
