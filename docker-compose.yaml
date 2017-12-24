@@ -6,6 +6,7 @@ services:
     command: bin/www
     restart: always
     volumes:
+      - /var/apps/iarl/node_modules
       - .:/var/apps/iarl/
     ports:
       - 3000:3000
