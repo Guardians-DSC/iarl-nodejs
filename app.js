@@ -1,10 +1,10 @@
-const express      = require('express'),
-      path         = require('path'),
-      favicon      = require('serve-favicon'),
-      logger       = require('morgan'),
-      bodyParser   = require('body-parser'),
-      load         = require('express-load');
-      session      = require('express-session');
+var express      = require('express'),
+    path         = require('path'),
+    favicon      = require('serve-favicon'),
+    logger       = require('morgan'),
+    bodyParser   = require('body-parser'),
+    load         = require('express-load');
+    session      = require('express-session');
 
 var app = express();
 
@@ -24,6 +24,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // create user session
 app.use(session({secret:'ss3ncr1ptk3yq1n3d4ni3l9iek', resave:false, saveUninitialized:true}));
 
+// verify if user is logged in
+app.use(['/api/servers', '/api/directories'], function(req, res, next) {
+  if (req.session.user == undefined){
+    res.status(500).json({message: "User isn't logged in!"});
+  }
+  next();
+});
+  
 // load routes
 load('controllers').then('routes').into(app);
 
