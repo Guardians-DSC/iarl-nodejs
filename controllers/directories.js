@@ -1,5 +1,5 @@
-const Client = require('ssh2-sftp-client');
-const url = require('url');
+var client = require('ssh2-sftp-client');
+var url = require('url');
 
 module.exports = function(app) {
 
@@ -26,7 +26,7 @@ module.exports = function(app) {
                 req.session.path[req.session.path.length - 1] += '/';
             }
 
-            const sftp = new Client();
+            var sftp = new client();
 
             var connectionSettings = {
                 host: req.session.host, // host to connect

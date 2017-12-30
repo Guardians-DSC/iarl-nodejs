@@ -1,10 +1,10 @@
-const express      = require('express'),
-      path         = require('path'),
-      favicon      = require('serve-favicon'),
-      logger       = require('morgan'),
-      bodyParser   = require('body-parser'),
-      load         = require('express-load');
-      session      = require('express-session');
+var express      = require('express'),
+    path         = require('path'),
+    favicon      = require('serve-favicon'),
+    logger       = require('morgan'),
+    bodyParser   = require('body-parser'),
+    load         = require('express-load');
+    session      = require('express-session');
 
 var app = express();
 
