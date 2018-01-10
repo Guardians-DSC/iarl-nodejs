@@ -5,7 +5,9 @@ module.exports = function(app) {
     var indexControl = {
         login: function(req, res, next) {
             if (req.body.username == "" || req.body.password == ""){
-                return next(new Error("Invalid JSON"));
+                var err = new Error("Invalid JSON");
+                err.status = 422;
+                return next(err);
             }
             // ----- switch to LDAP validation -----
             var connectionSettings = {
