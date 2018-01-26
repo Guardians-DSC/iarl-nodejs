@@ -24,6 +24,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // create user session
 app.use(session({secret:'ss3ncr1ptk3yq1n3d4ni3l9iek', resave:false, saveUninitialized:true}));
 
+// request permission for other domains
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+    next();
+});
+
 // verify if user is logged in
 app.use(['/api/servers', '/api/directories'], function(req, res, next) {
   if (req.session.user == undefined){
