@@ -1,6 +1,4 @@
 var express      = require('express'),
-    path         = require('path'),
-    favicon      = require('serve-favicon'),
     logger       = require('morgan'),
     bodyParser   = require('body-parser'),
     load         = require('express-load');
@@ -8,18 +6,12 @@ var express      = require('express'),
 
 var app = express();
 
-// aplication favicon
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
 // generate logs of requests
 app.use(logger('dev'));
 
 // converts the request to JSON
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// defines the static files directory
-app.use(express.static(path.join(__dirname, 'public')));
 
 // create user session
 app.use(session({secret:'ss3ncr1ptk3yq1n3d4ni3l9iek', resave:false, saveUninitialized:true}));
@@ -42,11 +34,6 @@ app.use(['/api/servers', '/api/directories'], function(req, res, next) {
   
 // load routes
 load('controllers').then('routes').into(app);
-
-// route to handle all angular requests
-app.get('*', function(req, res) {
-  res.sendfile('./views/index.html'); // load our public/index.html file
-});
 
 // catch authentication failed and forward to error handler
 app.use(function(err, req, res, next) {
