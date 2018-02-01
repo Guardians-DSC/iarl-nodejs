@@ -19,7 +19,7 @@ app.use(session({secret:'ss3ncr1ptk3yq1n3d4ni3l9iek', resave:false, saveUninitia
 // request permission for other domains
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
     next();
 });
@@ -31,7 +31,12 @@ app.use(['/api/servers', '/api/directories'], function(req, res, next) {
   }
   next();
 });
-  
+
+// sends empty JSON to OPTIONS requests
+app.options('*', function (req, res) {
+  res.send({message: "The server supports GET and POST requests"});
+}); 
+
 // load routes
 load('controllers').then('routes').into(app);
 
