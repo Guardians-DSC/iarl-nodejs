@@ -10,8 +10,8 @@ var app = express();
 app.use(logger('dev'));
 
 // converts the request to JSON
+app.use(bodyParser.json({ type: 'text' }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 // create user session
 app.use(session({secret:'ss3ncr1ptk3yq1n3d4ni3l9iek', resave:false, saveUninitialized:true}));
