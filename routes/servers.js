@@ -1,5 +1,5 @@
-module.exports = function(app) {
-    var servers = app.controllers.servers;
+module.exports = function (app) {
+  var servers = app.controllers.servers
 
-    app.route('/api/servers').get(servers.get);
+  app.route('/api/servers').get(servers.get)
 }
