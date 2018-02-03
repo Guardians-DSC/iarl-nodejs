@@ -1,5 +1,5 @@
-const client = require('ssh2-sftp-client')
-const sftp = new client()
+const Client = require('ssh2-sftp-client')
+const sftp = new Client()
 
 module.exports = function (app) {
   var indexControl = {
