@@ -4,7 +4,7 @@
   "description": "interface de acesso remoto a laboratorios",
   "main": "./bin/www",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "standard",
     "start": "node ./bin/www"
   },
   "repository": {
@@ -18,15 +18,17 @@
   },
   "dependencies": {
     "body-parser": "~1.18.2",
-    "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.15.5",
     "express-load": "~1.1.16",
     "express-session": "^1.15.6",
     "morgan": "~1.9.0",
-    "serve-favicon": "~2.4.5",
     "ssh2": "^0.5.5",
     "ssh2-sftp-client": "^2.0.0"
   },
-  "homepage": "https://github.com/Guardians-DSC/iarl#readme"
+  "homepage": "https://github.com/Guardians-DSC/iarl#readme",
+  "devDependencies": {
+    "nodemon": "^1.14.12",
+    "standart": "^6.1.0"
+  }
 }
