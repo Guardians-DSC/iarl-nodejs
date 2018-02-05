@@ -19,9 +19,7 @@ module.exports = function (app) {
 
       sftp.connect(connectionSettings)
       .then(function () {
-        req.session.user = req.body.username
-        req.session.password = req.body.password
-        req.session.path = []
+        req.session.username = req.body.username
         res.status(200).json({message: 'Sucessful login'})
       }).catch(next)
     },
