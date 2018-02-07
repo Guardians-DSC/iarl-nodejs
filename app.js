@@ -26,7 +26,7 @@ app.use(function (req, res, next) {
 
 // verify if user is logged in
 app.use(['/api/servers', '/api/directories'], function (req, res, next) {
-  if (req.session.user) {
+  if (!req.session.username) {
     res.status(500).json({message: "User isn't logged in!"})
   }
   next()
