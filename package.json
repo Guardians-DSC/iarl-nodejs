@@ -4,8 +4,11 @@
   "description": "interface de acesso remoto a laboratorios",
   "main": "./bin/www",
   "scripts": {
-    "test": "standard",
+    "test": "echo \"Design\"; standard; echo \"\nTests\"; mocha --timeout 10000 tests/*.test.js",
     "start": "node ./bin/www"
+  },
+  "standard": {
+    "ignore": ["/tests"]
   },
   "repository": {
     "type": "git",
@@ -23,11 +26,13 @@
     "express-load": "~1.1.16",
     "express-session": "^1.15.6",
     "morgan": "~1.9.0",
-    "ssh2": "^0.5.5",
     "ssh2-sftp-client": "^2.0.0"
   },
   "homepage": "https://github.com/Guardians-DSC/iarl#readme",
   "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^5.0.0",
     "nodemon": "^1.14.12",
     "standart": "^6.1.0"
   }
