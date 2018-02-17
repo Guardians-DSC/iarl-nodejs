@@ -1,27 +1,35 @@
-const Client = require('ssh2-sftp-client')
-const sftp = new Client()
+const ldap = require('ldapjs')
+const ldapConf = require('../config.json')
 
 module.exports = function (app) {
-  var indexControl = {
+  const loginControl = {
     login: function (req, res, next) {
       if (!req.body.username || !req.body.password) {
-        var err = new Error('Invalid JSON')
+        const err = new Error('Invalid JSON')
         err.status = 422
         return next(err)
       }
-      // ----- switch to LDAP validation -----
-      var connectionSettings = {
-        host: 'chopper.lcc.ufcg.edu.br', // host to connect
-        port: 23456, // port
-        username: req.body.username, // lcc username
-        password: req.body.password // user password
+
+      function authDN (dn, password, cb) {
+        const client = ldap.createClient({url: ldapConf.ldapUrl})
+
+        client.bind(dn, password, function (err) {
+          client.unbind()
+          cb(err, err === null)
+        })
       }
 
-      sftp.connect(connectionSettings)
-      .then(function () {
+      const dn = 'uid=' + req.body.username + ',' + ldapConf.ldapDN
+
+      authDN(dn, req.body.password, (err, status) => {
+        if (err) {
+          err.status = 401
+          return next(err)
+        }
+
         req.session.username = req.body.username
-        res.status(200).json({message: 'Sucessful login'})
-      }).catch(next)
+        res.send({message: 'Successful login'})
+      })
     },
 
     logout: function (req, res) {
@@ -30,5 +38,5 @@ module.exports = function (app) {
     }
   }
 
-  return indexControl
+  return loginControl
 }

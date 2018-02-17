@@ -40,14 +40,6 @@ app.options('*', function (req, res) {
 // load routes
 load('controllers').then('routes').into(app)
 
-// catch authentication failed and forward to error handler
-app.use(function (err, req, res, next) {
-  if (err.message === 'All configured authentication methods failed') {
-    err.status = 401
-  }
-  next(err)
-})
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error('Not Found')
