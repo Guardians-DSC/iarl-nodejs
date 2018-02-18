@@ -32,7 +32,7 @@ describe('/POST login', function () {
     .end(function (error, res) {
       res.should.have.status(401)
       res.body.should.be.a('object')
-      res.body.should.have.property('message').eql('All configured authentication methods failed')
+      res.body.should.have.property('message').eql('Invalid Credentials')
       done()
     })
   })

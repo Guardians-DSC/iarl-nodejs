@@ -8,7 +8,9 @@
     "start": "node ./bin/www"
   },
   "standard": {
-    "ignore": ["/tests"]
+    "ignore": [
+      "/tests"
+    ]
   },
   "repository": {
     "type": "git",
@@ -25,6 +27,7 @@
     "express": "~4.15.5",
     "express-load": "~1.1.16",
     "express-session": "^1.15.6",
+    "ldapjs": "^1.0.2",
     "morgan": "~1.9.0",
     "ssh2-sftp-client": "^2.0.0"
   },
