@@ -8,7 +8,9 @@
     "start": "node ./bin/www"
   },
   "standard": {
-    "ignore": ["/tests"]
+    "ignore": [
+      "/tests"
+    ]
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,7 @@
     "url": "https://github.com/Guardians-DSC/iarl/issues"
   },
   "dependencies": {
+    "adm-zip": "^0.4.7",
     "body-parser": "~1.18.2",
     "debug": "~2.6.9",
     "express": "~4.15.5",
