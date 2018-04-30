@@ -1,4 +1,0 @@
-{
-    "ldapUrl": "ldap://ldap.lcc.ufcg.edu.br",
-    "ldapDN": "ou=People,dc=lcc,dc=ufcg,dc=edu,dc=br"
-}
