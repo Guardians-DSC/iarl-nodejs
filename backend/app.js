@@ -3,6 +3,7 @@ const logger = require('morgan')
 const bodyParser = require('body-parser')
 const load = require('express-load')
 const session = require('express-session')
+const config = require('config')
 
 const app = express()
 
@@ -14,7 +15,7 @@ app.use(bodyParser.json({ type: 'text' }))
 app.use(bodyParser.json())
 
 // create user session
-app.use(session({secret: 'ss3ncr1ptk3yq1n3d4ni3l9iek', resave: false, saveUninitialized: true}))
+app.use(session({secret: config.get('jwtPrivateKey'), resave: false, saveUninitialized: true}))
 
 // request permission for other domains
 app.use(function (req, res, next) {
