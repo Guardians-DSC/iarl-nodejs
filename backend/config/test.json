@@ -1,4 +1,9 @@
 {
+    "jwtPrivateKey": "12345",
+    "test": {
+        "username": "teste",
+        "password": "teste"
+    },
     "ldap": {
         "url": "ldap://ldap.lcc.ufcg.edu.br",
         "dn": "ou=People,dc=lcc,dc=ufcg,dc=edu,dc=br"
