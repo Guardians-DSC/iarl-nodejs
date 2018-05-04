@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const load = require('express-load')
 const session = require('express-session')
 const config = require('config')
+const cors = require('cors')
 
 const app = express()
 
@@ -18,12 +19,7 @@ app.use(bodyParser.json())
 app.use(session({secret: config.get('jwtPrivateKey'), resave: false, saveUninitialized: true}))
 
 // request permission for other domains
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization')
-  next()
-})
+app.use(cors());
 
 // verify if user is logged in
 app.use(['/api/servers', '/api/directories'], function (req, res, next) {
@@ -34,9 +30,7 @@ app.use(['/api/servers', '/api/directories'], function (req, res, next) {
 })
 
 // sends empty JSON to OPTIONS requests
-app.options('*', function (req, res) {
-  res.send({message: 'The server supports GET and POST requests'})
-})
+app.options('*', cors())
 
 // load routes
 load('controllers').then('routes').into(app)
