@@ -7,7 +7,7 @@ module.exports = function (app) {
       let path = url.parse(req.url, true).query.path
 
       if (!path) {
-        path = '/home/' + req.session.username + '/'
+        path = '/home/' + req.user.username + '/'
       }
 
       fs.readdir(path, (err, list) => {
