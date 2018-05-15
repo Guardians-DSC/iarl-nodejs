@@ -1,42 +1,24 @@
-const ldap = require('ldapjs')
-const config = require('config')
+const ldapAuth = require('../modules/ldapAuth');
+const tokenGenerator = require('../modules/tokenGenerator');
 
-module.exports = function (app) {
-  const loginControl = {
-    login: function (req, res, next) {
-      if (!req.body.username || !req.body.password) {
-        const err = new Error('Invalid JSON')
-        err.status = 422
-        return next(err)
-      }
 
-      function authDN (dn, password, cb) {
-        const client = ldap.createClient({url: config.get('ldap.url')})
+var login = function(req, res, next) {
 
-        client.bind(dn, password, function (err) {
-          client.unbind()
-          cb(err, err === null)
-        })
-      }
-
-      const dn = 'uid=' + req.body.username + ',' + config.get('ldap.dn')
-
-      authDN(dn, req.body.password, (err, status) => {
-        if (err) {
-          err.status = 401
-          return next(err)
-        }
-
-        req.session.username = req.body.username
-        res.send({message: 'Successful login'})
-      })
-    },
-
-    logout: function (req, res) {
-      req.session.destroy()
-      res.status(200).json({message: 'User logged out'})
-    }
+  // validates json
+  if (!req.body.username || !req.body.password) {
+    const err = new Error('Invalid JSON')
+    err.status = 422
+    return next(err)
   }
 
-  return loginControl
+  // authenticate with LDAP and send token
+  ldapAuth(req)
+    .then(() => { 
+      let token = tokenGenerator(req)
+      res.send({token: token})
+    })
+    .catch((err) => { next(err) })
+
 }
+
+module.exports.login = login
