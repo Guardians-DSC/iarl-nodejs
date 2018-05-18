@@ -15,4 +15,6 @@ load('controllers').then('routes').into(app)
 // handle errors
 require('./startup/error')(app)
 
-module.exports = app
+// server listen on defined port
+var port = process.env.PORT || 3000;
+app.listen(port, () => { console.log(`server listen on port ${port}...`) })
