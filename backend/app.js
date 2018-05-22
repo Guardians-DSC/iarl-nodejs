@@ -7,10 +7,9 @@ const app = express()
 require('./startup/logger')(app)
 require('./startup/parser')(app)
 require('./startup/cors')(app)
-require('./startup/session')(app)
 
 // load routes
-load('controllers').then('routes').into(app)
+load('controllers').then('middlewares').then('routes').into(app)
 
 // handle errors
 require('./startup/error')(app)
