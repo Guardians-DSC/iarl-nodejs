@@ -9,7 +9,7 @@ module.exports = (app) => {
    * @apiParam {String} username Username of LCCs.
    * @apiParam {String} password Password of LCCs.
    * 
-   * @apiSuccess {String} token User token, valid for 20 minutes .
+   * @apiSuccess {String} token User token, valid for 20 minutes.
    * 
    * @apiSuccessExample {json} Success
    * HTTP/1.1 200 OK
