@@ -10,6 +10,6 @@ module.exports = function (app) {
     // error handler
     app.use(function (err, req, res, next) { 
         res.status(err.status || 500)
-        res.json({message: err.message})
+        res.json({error: err.message})
     })
 }
