@@ -1,5 +1,5 @@
 const express = require('express')
-const load = require('express-load')
+const consign = require('consign')
 
 const app = express()
 
@@ -8,8 +8,12 @@ require('./startup/logger')(app)
 require('./startup/parser')(app)
 require('./startup/cors')(app)
 
-// load routes
-load('controllers').then('middlewares').then('routes').into(app)
+// auto-load modules
+consign()
+  .include('controllers')
+  .then('middlewares')
+  .then('routes')
+  .into(app);
 
 // handle errors
 require('./startup/error')(app)
