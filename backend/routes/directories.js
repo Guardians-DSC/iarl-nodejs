@@ -1,6 +1,6 @@
 module.exports = function (app) {
   var auth = app.middlewares.auth
-  var directoryControl = app.controllers.directory
+  var directoriesREST = app.controllers.directories
 
-  app.get('/api/directory-list', auth, directoryControl.list)
+  app.get('/api/directories', auth, directoriesREST.get)
 }
