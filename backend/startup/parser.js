@@ -1,7 +1,6 @@
-const bodyParser = require('body-parser')
+const express = require('express')
 
 module.exports = function (app) {
-    // converts the request to JSON
-    app.use(bodyParser.json({ type: 'text' }))
-    app.use(bodyParser.json())
+    // populates req.body
+    app.use(express.json())
 }
