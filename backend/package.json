@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "config": "^1.30.0",
+    "consign": "^0.1.6",
     "cors": "^2.8.4",
     "express": "~4.16.0",
     "express-load": "~1.1.16",
