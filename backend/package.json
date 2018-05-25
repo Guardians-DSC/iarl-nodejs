@@ -22,10 +22,9 @@
     "url": "https://github.com/Guardians-DSC/iarl/issues"
   },
   "dependencies": {
-    "body-parser": "~1.18.2",
     "config": "^1.30.0",
     "cors": "^2.8.4",
-    "express": "~4.15.5",
+    "express": "~4.16.0",
     "express-load": "~1.1.16",
     "jsonwebtoken": "^8.2.1",
     "ldapjs": "^1.0.2",
