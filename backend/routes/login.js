@@ -3,7 +3,6 @@ module.exports = (app) => {
 
   /**
    * @api {post} /api/login Authenticate the user
-   * @apiName Login
    * @apiGroup Authenticate
    * 
    * @apiParam {String} username Username of LCCs.
