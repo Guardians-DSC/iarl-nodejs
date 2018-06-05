@@ -1,5 +1,4 @@
 module.exports = function (app) {
-  var servers = app.controllers.servers
-
-  app.route('/api/servers').get(servers.get)
+  const servers = app.controllers.servers
+  app.get('/api/servers', servers.get)
 }
