@@ -18,3 +18,12 @@ Tem-se como descrição o que se segue:
 ### Deploy
 
 Para subir uma instância do IARL, basta possuir Docker e docker-compose instalados e executar o comando `docker-compose up -d`
+
+## Usage
+First install the dependencies:
+> npm install  
+
+and run:
+> IARL_JWT_PRIVATE_KEY=yoursecretkey npm start  
+
+Obs: The login can only be done on the **UFCG network**, to simulate the login, run the API as a developer: ```NODE_DEV=development IARL_JWT_PRIVATE_KEY=yoursecretkey npm start```
