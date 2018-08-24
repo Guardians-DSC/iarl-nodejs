@@ -1,14 +1,12 @@
-module.exports = function (app) {
-  var indexControl = {
-    get: function (req, res) {
-            // load servers
-      var servers = require('../servers.json')
+function _get (req, res) {
+  // load servers
+  const servers = require('../servers.json')
 
-      res.status(200).json({
-        servers: servers
-      })
-    }
-  }
+  res.status(200).json({
+    servers: servers
+  })  
+}
 
-  return indexControl
+module.exports = {
+  get: _get
 }

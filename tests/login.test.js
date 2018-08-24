@@ -2,7 +2,7 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 const server = require('../app')
 const should = chai.should()
-const data = require('./test-config')
+const config = require('config')
 
 chai.use(chaiHttp)
 
@@ -11,8 +11,8 @@ describe('/POST login', function () {
     chai.request(server)
     .post('/api/login')
     .send({
-      username: data.username,
-      password: data.password
+      username: config.get('test.username'),
+      password: config.get('test.password')
     })
     .end(function (error, res) {
       res.should.have.status(200)
@@ -32,7 +32,7 @@ describe('/POST login', function () {
     .end(function (error, res) {
       res.should.have.status(401)
       res.body.should.be.a('object')
-      res.body.should.have.property('message').eql('All configured authentication methods failed')
+      res.body.should.have.property('message').eql('Invalid Credentials')
       done()
     })
   })

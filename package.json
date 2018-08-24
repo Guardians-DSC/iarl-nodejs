@@ -5,7 +5,8 @@
   "main": "./bin/www",
   "scripts": {
     "test": "echo \"Design\"; standard; echo \"\nTests\"; mocha --timeout 10000 tests/*.test.js",
-    "start": "node ./bin/www"
+    "start": "node app.js",
+		"dev": "IARL_JWT_PRIVATE_KEY=1234 NODE_DEV=development node app.js"
   },
   "standard": {
     "ignore": [
@@ -25,11 +26,14 @@
     "adm-zip": "^0.4.7",
     "body-parser": "~1.18.2",
     "debug": "~2.6.9",
-    "express": "~4.15.5",
+    "config": "^1.30.0",
+    "consign": "^0.1.6",
+    "cors": "^2.8.4",
+    "express": "~4.16.0",
     "express-load": "~1.1.16",
-    "express-session": "^1.15.6",
-    "morgan": "~1.9.0",
-    "ssh2-sftp-client": "^2.0.0"
+    "jsonwebtoken": "^8.2.1",
+    "ldapjs": "^1.0.2",
+    "morgan": "~1.9.0"
   },
   "homepage": "https://github.com/Guardians-DSC/iarl#readme",
   "devDependencies": {
@@ -37,6 +41,7 @@
     "chai-http": "^3.0.0",
     "mocha": "^5.0.0",
     "nodemon": "^1.14.12",
-    "standart": "^6.1.0"
+    "standart": "^6.1.0",
+    "debug": "~2.6.9"
   }
 }
