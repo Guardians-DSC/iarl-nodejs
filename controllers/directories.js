@@ -1,15 +1,10 @@
 const fs = require('fs')
+const path = require('path')
 
 
 function _get (req, res, next) {
-  let path = req.query.path;
-
-  if (!path) {
-    path = ""
-    absolutePath = '/home/' + req.user.username + '/'
-  } else {
-    absolutePath = '/home/' + req.user.username + '/' + path 
-  }
+  const relativePath = req.query.path || ""
+  const absolutePath = '/home/' + req.user.username + '/' + relativePath
 
   fs.readdir(absolutePath, (err, list) => {
     if (err) { 
@@ -18,15 +13,22 @@ function _get (req, res, next) {
     }
 
     list.forEach((item, i) => {
-      list[i] = {
-        name: item,
-        path: path + '/' + item,
-        isFile: fs.statSync(absolutePath + '/' + item).isFile()
-      }
+      _getItemProperties({ path: absolutePath, item: item }, result => list[i] = result)
     })
 
-    res.send({items: list})
+    res.send({ path: relativePath, items: list })
   })
+}
+
+function _getItemProperties (local, callback) {
+  const itemPath = local.path + '/' + local.item
+  let itemProperties = { name: local.item, isFile: fs.statSync(itemPath).isFile() }
+
+  if (itemProperties.isFile) {
+    itemProperties.extension = path.extname(local.item)
+  }
+
+  callback(itemProperties)
 }
 
 module.exports = {
