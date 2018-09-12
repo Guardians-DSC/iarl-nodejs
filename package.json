@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Design\"; standard; echo \"\nTests\"; mocha --timeout 10000 tests/*.test.js",
     "start": "node app.js",
-		"dev": "IARL_JWT_PRIVATE_KEY=1234 NODE_DEV=development node app.js"
+    "dev": "IARL_JWT_PRIVATE_KEY=1234 NODE_DEV=development nodemon app.js"
   },
   "standard": {
     "ignore": [
