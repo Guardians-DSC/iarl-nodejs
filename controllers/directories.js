@@ -4,7 +4,14 @@ const path = require('path')
 
 function _get (req, res, next) {
   const relativePath = req.query.path || ""
-  const absolutePath = '/home/' + req.user.username + '/' + relativePath
+  const absolutePath = path.resolve('/home/' + req.user.username + '/' + relativePath)
+
+  const regex = new RegExp('^\/home\/' + req.user.username)
+  if (!absolutePath.match(regex)) {
+    const err = new Error('Unauthorized access')
+    err.status = 403
+    next(err);
+  }
 
   fs.readdir(absolutePath, (err, list) => {
     if (err) { 
