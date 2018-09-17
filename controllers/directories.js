@@ -1,10 +1,10 @@
 const fs = require('fs')
 const path = require('path')
-
+const config = require('config')
 
 function _get (req, res, next) {
   const relativePath = req.query.path || ""
-  const absolutePath = path.resolve('/home/' + req.user.username + '/' + relativePath)
+  const absolutePath = path.resolve(config.get('baseDir'), req.user.username, relativePath)
 
   const regex = new RegExp('^\/home\/' + req.user.username)
   if (!absolutePath.match(regex)) {
