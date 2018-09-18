@@ -30,10 +30,11 @@ function _get (req, res, next) {
 
 function _populateZip(userPath, username, zip) {
   userPath.forEach(item => {
-    if (_isDirectory(_getAbsolutePath(item, username))) {
-      zip.addLocalFolder(_getAbsolutePath(item, username))
+    const absolutePath = _getAbsolutePath(item, username)
+    if (_isDirectory(absolutePath)) {
+      zip.addLocalFolder(absolutePath)
     } else {
-      zip.addLocalFile(_getAbsolutePath(item, username))
+      zip.addLocalFile(absolutePath)
     }
   })
 }
