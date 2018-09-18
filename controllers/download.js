@@ -8,7 +8,7 @@ function _get (req, res, next) {
   const username = req.user.username
 
   if (!userPath) {
-    const err = new Error('Invalid resquest')
+    const err = new Error('Invalid request')
     err.status = 422
     return next(err)
   }
