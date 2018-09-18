@@ -15,7 +15,7 @@ var login = function(req, res, next) {
   ldapAuth(req)
     .then(() => { 
       let token = tokenGenerator(req)
-      res.send({token: token})
+      setTimeout(() => { res.send({token: token}) }, 200)
     })
     .catch((err) => { next(err) })
 

@@ -1,47 +1,54 @@
 const fs = require('fs')
 const AdmZip = require('adm-zip')
-const zip = new AdmZip()
+const config = require('config')
+const path = require('path')
 
 function _get (req, res, next) {
-  const path = req.query.path
+  const userPath = req.query.path
+  const username = req.user.username
 
-  if (!path) {
+  if (!userPath) {
     const err = new Error('Invalid resquest')
     err.status = 422
     return next(err)
   }
 
-  // excluir essa linha
-  req.user = {username: 'daniel'}
-
-  if (Array.isArray(path)) {
-    path.forEach(element => {
-      element = '/home/' + req.user.username + '/' + element
-      if (fs.statSync(element).isDirectory()) {
-        zip.addLocalFolder(element)
-      } else {
-        zip.addLocalFile(element)
-      }
-    })
-
-    res.set('content-type', 'application/zip')
-    res.send(zip.toBuffer())
+  if (Array.isArray(userPath)) {
+    const zip = new AdmZip()
+    _populateZip(userPath, username, zip)
+    _sendZip(res, zip)
   } 
-  else if (fs.statSync('/home/' + req.user.username + '/' + path).isDirectory()) {
-    zip.addLocalFolder('/home/' + req.user.username + '/' + path);
-
-    res.set('content-type', 'application/zip')
-    res.send(zip.toBuffer())
+  else if (_isDirectory(_getAbsolutePath(userPath, username))) {
+    const zip = new AdmZip()
+    zip.addLocalFolder(_getAbsolutePath(userPath, username));
+    _sendZip(res, zip)
   }
   else {
-    fs.readFile('/home/' + req.user.username + '/' + path, { encoding: 'utf8' }, function (err, data ) {
-      if (err) {
-        next(err)
-      }
-
-      res.send(data)
-    });
+    res.download(_getAbsolutePath(userPath, username)) 
   }
+}
+
+function _populateZip(userPath, username, zip) {
+  userPath.forEach(item => {
+    if (_isDirectory(_getAbsolutePath(item, username))) {
+      zip.addLocalFolder(_getAbsolutePath(item, username))
+    } else {
+      zip.addLocalFile(_getAbsolutePath(item, username))
+    }
+  })
+}
+
+function _sendZip(res, zip) {
+  res.set('content-type', 'application/zip')
+  res.send(zip.toBuffer())
+}
+
+function _isDirectory(path) {
+  return fs.statSync(path).isDirectory()
+}
+
+function _getAbsolutePath(userPath, username) {
+  return path.resolve(config.get('baseDir'), username, userPath)
 }
 
 module.exports = {

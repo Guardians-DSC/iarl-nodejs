@@ -1,4 +1,5 @@
 {
-    "jwtPrivateKey": "IARL_JWT_PRIVATE_KEY"
+    "jwtPrivateKey": "IARL_JWT_PRIVATE_KEY",
+    "baseDir": "BASE_DIR"
 }
 

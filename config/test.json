@@ -1,5 +1,6 @@
 {
     "jwtPrivateKey": "12345",
+    "baseDir": "/home/user",
     "test": {
         "username": "teste",
         "password": "teste"
