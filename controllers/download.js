@@ -54,3 +54,4 @@ function _getAbsolutePath(userPath, username) {
 module.exports = {
   get: _get
 }
+
