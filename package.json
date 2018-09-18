@@ -23,6 +23,7 @@
     "url": "https://github.com/Guardians-DSC/iarl/issues"
   },
   "dependencies": {
+    "adm-zip": "^0.4.7",
     "config": "^1.30.0",
     "consign": "^0.1.6",
     "cors": "^2.8.4",
