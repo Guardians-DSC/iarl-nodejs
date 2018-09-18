@@ -2,33 +2,48 @@ const fs = require('fs')
 const AdmZip = require('adm-zip')
 const zip = new AdmZip()
 
-module.exports = function (app) {
-  var downloadControl = {
-    download: function (req, res, next) {
-      const path = req.body.path
+function _get (req, res, next) {
+  const path = req.query.path
 
-      if (!path) {
-        const err = new Error('Invalid JSON')
-        err.status = 422
-        return next(err)
-      }
-
-      if (path.length > 1 || fs.statSync('/home/' + req.session.username + '/' + path[0]).isDirectory()) {
-        path.forEach(element => {
-          element = '/home/' + req.session.username + '/' + element
-          if (fs.statSync(element).isDirectory()) {
-            zip.addLocalFolder(element)
-          } else {
-            zip.addLocalFile(element)
-          }
-        })
-        res.set('content-type', 'application/zip')
-        res.send(zip.toBuffer())
-      } else {
-        res.download('/home/' + req.session.username + '/' + path)
-      }
-    }
+  if (!path) {
+    const err = new Error('Invalid resquest')
+    err.status = 422
+    return next(err)
   }
 
-  return downloadControl
+  // excluir essa linha
+  req.user = {username: 'daniel'}
+
+  if (Array.isArray(path)) {
+    path.forEach(element => {
+      element = '/home/' + req.user.username + '/' + element
+      if (fs.statSync(element).isDirectory()) {
+        zip.addLocalFolder(element)
+      } else {
+        zip.addLocalFile(element)
+      }
+    })
+
+    res.set('content-type', 'application/zip')
+    res.send(zip.toBuffer())
+  } 
+  else if (fs.statSync('/home/' + req.user.username + '/' + path).isDirectory()) {
+    zip.addLocalFolder('/home/' + req.user.username + '/' + path);
+
+    res.set('content-type', 'application/zip')
+    res.send(zip.toBuffer())
+  }
+  else {
+    fs.readFile('/home/' + req.user.username + '/' + path, { encoding: 'utf8' }, function (err, data ) {
+      if (err) {
+        next(err)
+      }
+
+      res.send(data)
+    });
+  }
+}
+
+module.exports = {
+  get: _get
 }

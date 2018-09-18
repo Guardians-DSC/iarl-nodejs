@@ -1,6 +1,8 @@
 module.exports = function (app) {
-    var downloadControl = app.controllers.download
+  var auth = app.middlewares.auth
+  var downloadControl = app.controllers.download
 
-    app.route('/api/download').post(downloadControl.download)
-  }
+  // app.get('/api/download', auth, downloadControl.get)
+  app.get('/api/download', downloadControl.get)
+}
 
