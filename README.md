@@ -1,6 +1,7 @@
 IARL
 ===
 
+[![Build Status](https://travis-ci.com/Guardians-DSC/iarl-nodejs.svg?branch=master)](https://travis-ci.com/Guardians-DSC/iarl-nodejs)
 [![codebeat badge](https://codebeat.co/badges/976cc512-6101-4190-9dfe-2217bc8379f8)](https://codebeat.co/projects/github-com-guardians-dsc-iarl-nodejs-master)
 [![GitHub issues](https://img.shields.io/github/issues/Guardians-DSC/iarl.svg)](https://github.com/Guardians-DSC/iarl/issues)
 [![GitHub forks](https://img.shields.io/github/forks/Guardians-DSC/iarl.svg)](https://github.com/Guardians-DSC/iarl/network)
@@ -27,3 +28,6 @@ and run:
 
 Obs: The login can only be done on the **UFCG network**, to simulate the login, run the API as a developer: 
 > npm run dev
+
+Lints and fixes files
+> npm run lint
