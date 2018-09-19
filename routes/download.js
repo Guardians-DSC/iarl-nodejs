@@ -23,10 +23,16 @@ module.exports = function (app) {
    * 
    * @apiParam {String} path Path to file.
    * 
+   * @apiError ENOENT No such file or directory.
    * @apiError InvalidRequest The "path" is required.
    * @apiError InvalidCredentials The credentials are invalid.
+   * @apiError NoTokenProvided No token provided.
    * 
-   * 
+   * @apiErrorExample {json} ENOENT
+   * HTTP/1.1 422 BadRequest
+   * {
+   *    "error": "Invalid request"
+   * }
    * @apiErrorExample {json} InvalidRequest
    * HTTP/1.1 422 BadRequest
    * {

@@ -228,6 +228,12 @@
           {
             "group": "Error 4xx",
             "optional": false,
+            "field": "ENOENT",
+            "description": "<p>No such file or directory.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
             "field": "InvalidRequest",
             "description": "<p>The &quot;path&quot; is required.</p>"
           },
@@ -236,10 +242,21 @@
             "optional": false,
             "field": "InvalidCredentials",
             "description": "<p>The credentials are invalid.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NoTokenProvided",
+            "description": "<p>No token provided.</p>"
           }
         ]
       },
       "examples": [
+        {
+          "title": "ENOENT",
+          "content": "HTTP/1.1 422 BadRequest\n{\n   \"error\": \"Invalid request\"\n}",
+          "type": "json"
+        },
         {
           "title": "InvalidRequest",
           "content": "HTTP/1.1 422 BadRequest\n{\n   \"error\": \"Invalid request\"\n}",
