@@ -1,19 +1,19 @@
 module.exports = function (app) {
-  var auth = app.middlewares.auth
-  var directoriesREST = app.controllers.directories
+  var auth = app.middlewares.auth;
+  var directoriesREST = app.controllers.directories;
 
   /**
    * @api {get} /api/directories List items
    * @apiGroup Directories
-   * 
-   * @apiDescription 
-   * List items from specified path. 
+   *
+   * @apiDescription
+   * List items from specified path.
    * The token is needed.
-   * 
+   *
    * @apiHeader {String} Authorization Authorization token.
-   * 
+   *
    * @apiParam {String} path The directory path.
-   * 
+   *
    * @apiExample {curl} Example usage
    * curl -H "Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRhbmllbCIsImlhdCI6MTUyNzI5Mjk2NSwiZXhwIjoxNTI3Mjk0MTY1fQ.M8HAJAjq5E8k-e4LzxMXccG7z5ay4Yrs05ZmhXhMv6g" http://127.0.0.1:3000/api/directories?path=Documents/example
    *
@@ -33,11 +33,11 @@ module.exports = function (app) {
    *         }
    *     ]
    * }
-   * 
+   *
    * @apiError ENOENT No such file or directory.
    * @apiError NoTokenProvided No token provided.
    * @apiError InvalidToken Invalid token.
-   * 
+   *
    * @apiErrorExample {json} ENOENT
    * HTTP/1.1 404 NotFound
    * {
@@ -53,7 +53,7 @@ module.exports = function (app) {
    * {
    *    "error": "Invalid token"
    * }
-   * 
+   *
    */
-  app.get('/api/directories', auth, directoriesREST.get)
-}
+  app.get('/api/directories', auth, directoriesREST.get);
+};
