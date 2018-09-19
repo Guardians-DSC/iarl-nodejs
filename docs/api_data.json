@@ -172,5 +172,94 @@
     "filename": "routes/directories.js",
     "groupTitle": "Directories",
     "name": "GetApiDirectories"
+  },
+  {
+    "type": "get",
+    "url": "/api/download",
+    "title": "Downloads a file, a directory, or a set of them",
+    "group": "Download",
+    "description": "<p>Downloads a file, directory or a set of items from specified path.<br> If the request points to a file, the file is downloaded, otherwise, if points to a directory, the directory will be zipped and downloaded, likewise for a set of directories and files. The token is needed.</p>",
+    "examples": [
+      {
+        "title": "Download a file",
+        "content": "curl -H \"Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRhbmllbCIsImlhdCI6MTUyNzI5Mjk2NSwiZXhwIjoxNTI3Mjk0MTY1fQ.M8HAJAjq5E8k-e4LzxMXccG7z5ay4Yrs05ZmhXhMv6g\" http://127.0.0.1:3000/api/download?path=test.txt",
+        "type": "curl"
+      },
+      {
+        "title": "Download a directory",
+        "content": "curl -H \"Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRhbmllbCIsImlhdCI6MTUyNzI5Mjk2NSwiZXhwIjoxNTI3Mjk0MTY1fQ.M8HAJAjq5E8k-e4LzxMXccG7z5ay4Yrs05ZmhXhMv6g\" http://127.0.0.1:3000/api/download?path=example",
+        "type": "curl"
+      },
+      {
+        "title": "Download a set of items",
+        "content": "curl -H \"Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRhbmllbCIsImlhdCI6MTUyNzI5Mjk2NSwiZXhwIjoxNTI3Mjk0MTY1fQ.M8HAJAjq5E8k-e4LzxMXccG7z5ay4Yrs05ZmhXhMv6g\" http://127.0.0.1:3000/api/download?path=example&path=test.txt",
+        "type": "curl"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Authorization token.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "path",
+            "description": "<p>Path to file.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidRequest",
+            "description": "<p>The &quot;path&quot; is required.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidCredentials",
+            "description": "<p>The credentials are invalid.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "InvalidRequest",
+          "content": "HTTP/1.1 422 BadRequest\n{\n   \"error\": \"Invalid request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "NoTokenProvided",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n   \"error\": \"Access denied. No token provided.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "InvalidToken",
+          "content": "HTTP/1.1 400 BadRequest\n{\n   \"error\": \"Invalid token\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/download.js",
+    "groupTitle": "Download",
+    "name": "GetApiDownload"
   }
 ]
