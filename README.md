@@ -27,3 +27,6 @@ and run:
 
 Obs: The login can only be done on the **UFCG network**, to simulate the login, run the API as a developer: 
 > npm run dev
+
+Lints and fixes files
+> npm run lint

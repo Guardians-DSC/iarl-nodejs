@@ -1,6 +1,6 @@
 module.exports = function (app) {
-  var auth = app.middlewares.auth
-  var downloadControl = app.controllers.download
+  var auth = app.middlewares.auth;
+  var downloadControl = app.controllers.download;
 
     /**
    * @api {get} /api/download Downloads a file, a directory, or a set of them
@@ -65,6 +65,6 @@ module.exports = function (app) {
    *    "error": "Invalid token"
    * }
    */
-  app.get('/api/download', auth, downloadControl.get)
-}
+  app.get('/api/download', auth, downloadControl.get);
+};
 

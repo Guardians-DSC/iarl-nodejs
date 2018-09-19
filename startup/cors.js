@@ -1,9 +1,9 @@
-const cors = require('cors')
+const cors = require('cors');
 
 module.exports = function (app) {
-    // request permission for other domains
-    app.use(cors());
+  // request permission for other domains
+  app.use(cors());
 
-    // handle OPTIONS requests
-    app.options('*', cors())
-}
+  // handle OPTIONS requests
+  app.options('*', cors());
+};
