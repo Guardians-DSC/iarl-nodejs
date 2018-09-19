@@ -172,5 +172,130 @@ define({ "api": [
     "filename": "routes/directories.js",
     "groupTitle": "Directories",
     "name": "GetApiDirectories"
+  },
+  {
+    "type": "get",
+    "url": "/api/download",
+    "title": "Downloads a file, a directory, or a set of them",
+    "group": "Download",
+    "description": "<p>Downloads a file, directory or a set of items from specified path.<br> If the request points to a <strong>file</strong>, the file is downloaded. Otherwise, if points to a <strong>directory</strong>, the directory will be zipped and downloaded, likewise for a <strong>set of directories and files</strong>.<br> The token is needed.</p>",
+    "examples": [
+      {
+        "title": "Download a file",
+        "content": "curl -H \"Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRhbmllbCIsImlhdCI6MTUyNzI5Mjk2NSwiZXhwIjoxNTI3Mjk0MTY1fQ.M8HAJAjq5E8k-e4LzxMXccG7z5ay4Yrs05ZmhXhMv6g\" http://127.0.0.1:3000/api/download?path=test.txt",
+        "type": "curl"
+      },
+      {
+        "title": "Download a directory",
+        "content": "curl -H \"Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRhbmllbCIsImlhdCI6MTUyNzI5Mjk2NSwiZXhwIjoxNTI3Mjk0MTY1fQ.M8HAJAjq5E8k-e4LzxMXccG7z5ay4Yrs05ZmhXhMv6g\" http://127.0.0.1:3000/api/download?path=example",
+        "type": "curl"
+      },
+      {
+        "title": "Download a set of items",
+        "content": "curl -H \"Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRhbmllbCIsImlhdCI6MTUyNzI5Mjk2NSwiZXhwIjoxNTI3Mjk0MTY1fQ.M8HAJAjq5E8k-e4LzxMXccG7z5ay4Yrs05ZmhXhMv6g\" http://127.0.0.1:3000/api/download?path=example&path=test.txt&path=test2.txt",
+        "type": "curl"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Authorization token.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "path",
+            "description": "<p>Path to file.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Download a file",
+          "content": "HTTP/1.1 200 OK\n// The header response will contain\ncontent-disposition: attachment; filename=\"test.txt\" // may vary according to file name\ncontent-type: text/plain; charset=UTF-8 // may vary depending on the file extension",
+          "type": "text"
+        },
+        {
+          "title": "Download a directory",
+          "content": "HTTP/1.1 200 OK\n// The header response will contain\ncontent-type: application/zip",
+          "type": "text"
+        },
+        {
+          "title": "Download a set of files and directories",
+          "content": "HTTP/1.1 200 OK\n// The header response will contain\ncontent-type: application/zip",
+          "type": "text"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidRequest",
+            "description": "<p>The &quot;path&quot; is required.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ENOENT",
+            "description": "<p>No such file or directory.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "InvalidCredentials",
+            "description": "<p>The credentials are invalid.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "NoTokenProvided",
+            "description": "<p>No token provided.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "InvalidRequest",
+          "content": "HTTP/1.1 422 BadRequest\n{\n   \"error\": \"Invalid request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "ENOENT",
+          "content": "HTTP/1.1 404 NotFound\n{\n   \"error\": \"ENOENT: no such file or directory, scandir '<directory_path>'\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "NoTokenProvided",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n   \"error\": \"Access denied. No token provided.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "InvalidToken",
+          "content": "HTTP/1.1 400 BadRequest\n{\n   \"error\": \"Invalid token\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/download.js",
+    "groupTitle": "Download",
+    "name": "GetApiDownload"
   }
 ] });
