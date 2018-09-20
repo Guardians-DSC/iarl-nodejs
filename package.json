@@ -9,6 +9,9 @@
     "start": "node app.js",
     "dev": "IARL_JWT_PRIVATE_KEY=1234 BASE_DIR=/home NODE_DEV=development nodemon app.js"
   },
+  "engines": {
+    "node": "8.11.2"
+  },
   "standard": {
     "ignore": [
       "/tests"
@@ -25,15 +28,15 @@
   },
   "dependencies": {
     "adm-zip": "^0.4.7",
+    "compression": "^1.7.3",
     "config": "^1.30.0",
     "consign": "^0.1.6",
     "cors": "^2.8.4",
     "express": "~4.16.0",
-    "express-load": "~1.1.16",
+    "helmet": "^3.13.0",
     "jsonwebtoken": "^8.2.1",
     "ldapjs": "^1.0.2",
-    "morgan": "~1.9.0",
-    "nodemon": "^1.18.4"
+    "morgan": "~1.9.0"
   },
   "homepage": "https://github.com/Guardians-DSC/iarl#readme",
   "devDependencies": {
