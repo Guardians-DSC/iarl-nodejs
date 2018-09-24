@@ -39,7 +39,7 @@
       "examples": [
         {
           "title": "Success",
-          "content": "HTTP/1.1 200 OK\n{\n   \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRhbmllbHJjIiwiaWF0IjoxNTI3MTY1NTg2LCJleHAiOjE1MjcxNjY3ODZ9.VEvOcyPa-LKSr0kJXTa6TvpCqyKmenJRbEgdxNKJjik\" \n}",
+          "content": "HTTP/1.1 200 OK\n{\n   \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRhbmllbHJjIiwiaWF0IjoxNTI3MTY1NTg2LCJleHAiOjE1MjcxNjY3ODZ9.VEvOcyPa-LKSr0kJXTa6TvpCqyKmenJRbEgdxNKJjik\"\n}",
           "type": "json"
         }
       ]
@@ -178,7 +178,7 @@
     "url": "/api/download",
     "title": "Downloads a file, a directory, or a set of them",
     "group": "Download",
-    "description": "<p>Downloads a file, directory or a set of items from specified path.<br> If the request points to a <strong>file</strong>, the file is downloaded. Otherwise, if points to a <strong>directory</strong>, the directory will be zipped and downloaded, likewise for a <strong>set of directories and files</strong>.<br> The token is needed.</p>",
+    "description": "<p>Downloads a file, directory or a set of items from specified path. If the request points to a <strong>file</strong>, the file is downloaded. Otherwise, if points to a <strong>directory</strong>, the directory will be zipped and downloaded, likewise for a <strong>set of directories and files</strong>. The token is needed.</p>",
     "examples": [
       {
         "title": "Download a file",
@@ -297,5 +297,36 @@
     "filename": "routes/download.js",
     "groupTitle": "Download",
     "name": "GetApiDownload"
+  },
+  {
+    "type": "get",
+    "url": "/api/servers",
+    "title": "List servers",
+    "group": "Servers",
+    "description": "<p>Lists all servers that the client can connect to have access to user directories.</p>",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "servers",
+            "description": "<p>An array with server names, addresses, and ports.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200 OK\n{\n   \"servers\": [\n       {\n           \"name\": \"lcc1\",\n           \"host\": \"chopper.lcc.ufcg.edu.br\",\n           \"port\": \"23456\"\n       },\n       {\n           \"name\": \"lcc2\",\n           \"host\": \"r2d2.lcc.ufcg.edu.br\",\n           \"port\": \"23456\"\n       },\n       {\n           \"name\": \"lcc3\",\n           \"host\": \"kirk.lcc.ufcg.edu.br\",\n           \"port\": \"23456\"\n       }\n   ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "routes/servers.js",
+    "groupTitle": "Servers",
+    "name": "GetApiServers"
   }
 ]
