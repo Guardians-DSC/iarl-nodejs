@@ -23,6 +23,11 @@ module.exports = function (app) {
    *            "name": "lcc2",
    *            "host": "r2d2.lcc.ufcg.edu.br",
    *            "port": "23456"
+   *        },
+   *        {
+   *            "name": "lcc3",
+   *            "host": "kirk.lcc.ufcg.edu.br",
+   *            "port": "23456"
    *        }
    *    ]
    * }
