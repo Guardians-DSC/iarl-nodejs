@@ -319,7 +319,7 @@
       "examples": [
         {
           "title": "Success",
-          "content": "HTTP/1.1 200 OK\n{\n   \"servers\": [\n       {\n           \"name\": \"lcc1\",\n           \"host\": \"chopper.lcc.ufcg.edu.br\",\n           \"port\": \"23456\"\n       },\n       {\n           \"name\": \"lcc2\",\n           \"host\": \"r2d2.lcc.ufcg.edu.br\",\n           \"port\": \"23456\"\n       }\n   ]\n}",
+          "content": "HTTP/1.1 200 OK\n{\n   \"servers\": [\n       {\n           \"name\": \"lcc1\",\n           \"host\": \"chopper.lcc.ufcg.edu.br\",\n           \"port\": \"23456\"\n       },\n       {\n           \"name\": \"lcc2\",\n           \"host\": \"r2d2.lcc.ufcg.edu.br\",\n           \"port\": \"23456\"\n       },\n       {\n           \"name\": \"lcc3\",\n           \"host\": \"kirk.lcc.ufcg.edu.br\",\n           \"port\": \"23456\"\n       }\n   ]\n}",
           "type": "json"
         }
       ]
