@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 
 function sendToken (req) {
-  const token = jwt.sign({ username: req.body.username }, config.get('jwtPrivateKey'), { expiresIn: 60 * 20 });
+  const token = jwt.sign({ username: req.body.username }, config.get('jwtPrivateKey'));
   return token;
 }
 
