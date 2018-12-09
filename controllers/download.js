@@ -6,6 +6,7 @@ const archiveCreator = require('../utils/archive-creator');
 async function _get (req, res, next) {
   const userPath = req.query.path;
   const root = path.join(config.get('baseDir'), req.user.username);
+  const absolutePath = path.resolve(root, userPath);
 
   if (!userPath) {
     const err = new Error('Invalid request');
@@ -13,34 +14,20 @@ async function _get (req, res, next) {
     return next(err);
   }
 
-  if (Array.isArray(userPath) || _isDirectory(path.resolve(root, userPath))) {
+  if (_isDirectory(path.resolve(root, userPath))) {
     res.set('Content-Type', 'application/zip');
-    res.set('Content-Disposition', 'attachment;filename=download.zip');
+    res.set('Content-Disposition', `attachment;filename=${path.basename(userPath)}.zip`);
     try {
       const archive = await archiveCreator();
       archive.pipe(res);
-      _populateZip(userPath, root, archive);
+      archive.directory(absolutePath, userPath);
       archive.finalize();
     } catch (err) {
       next(err);
     }
   } else {
-    res.download(path.resolve(root, userPath));
+    res.download(absolutePath);
   }
-}
-
-function _populateZip (userPath, root, archive) {
-  if (!Array.isArray(userPath)) {
-    userPath = [userPath];
-  }
-  userPath.forEach(item => {
-    const absolutePath = path.resolve(root, item);
-    if (_isDirectory(absolutePath)) {
-      archive.directory(absolutePath, item);
-    } else {
-      archive.append(fs.createReadStream(absolutePath));
-    }
-  });
 }
 
 function _isDirectory (path) {
