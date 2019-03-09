@@ -7,27 +7,36 @@ IARL
 [![GitHub forks](https://img.shields.io/github/forks/Guardians-DSC/iarl.svg)](https://github.com/Guardians-DSC/iarl/network)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/Guardians-DSC/iarl/master/LICENSE)
 
-### Descrição
+## Descrição
 Tem-se como descrição o que se segue:
 
-> A **I**nterface de **A**cesso **R**emoto a **L**aboratórios é uma aplicação web que fornece uma interface amigável, de uso fácil e simplificado, de acesso a arquivos e diretórios para os usuários dos LCC (Laboratório de Ciência da Computação).
+> A **I**nterface de **A**cesso **R**emoto a **L**aboratórios é uma aplicação web que fornece uma interface amigável, de uso fácil e simplificado, de acesso a arquivos e diretórios para os usuários dos LCCs (Laboratórios de Ciência da Computação).
 
-### Technologies
-* [NodeJS 8.11.2](https://nodejs.org/en/)
+## Documentação
+[Link para a documentação](https://guardians-dsc.github.io/iarl-nodejs/)
 
-### Deploy
+## Tecnologias
+* [NodeJS 10.15.3](https://nodejs.org/en/)
 
-Para subir uma instância do IARL, basta possuir Docker e docker-compose instalados e executar o comando `docker-compose up -d`
-
-### Usage
-First install the dependencies:
+## Deploy
+Primeiro instale as dependências:
 > npm install  
 
-and run:
-> IARL_JWT_PRIVATE_KEY=yoursecretkey npm start  
+Em seguida rode o comando:
+> PORT=3000 IARL_JWT_PRIVATE_KEY=yoursecretkey BASE_DIR=/home npm start
 
-Obs: The login can only be done on the **UFCG network**, to simulate the login, run the API as a developer: 
+* PORT: A porta em que rodará a API (padrão: 3000)
+* IARL_JWT_PRIVATE_KEY: Chave secreta do token
+* BASE_DIR: Diretório que contém as pastas dos usuários
+
+## Desenvolvimento
+
+O login só pode ser realizado na **rede da UFCG**, para simular o login localmente, rode a API como desenvolvedor: 
 > npm run dev
 
-Lints and fixes files
-> npm run lint
+Caso não tenha o nodemon instalado, rode o seguinte comando:
+> npm install -g nodemon
+
+### Docker
+
+Para subir uma instância do IARL, basta possuir Docker e docker-compose instalados e executar o comando `docker-compose up -d`
