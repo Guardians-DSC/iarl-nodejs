@@ -10,7 +10,7 @@ IARL
 ## Descrição
 Tem-se como descrição o que se segue:
 
-> A **I**nterface de **A**cesso **R**emoto a **L**aboratórios é uma aplicação web que fornece uma interface amigável, de uso fácil e simplificado, de acesso a arquivos e diretórios aos usuários dos LCCs (Laboratórios de Ciência da Computação).
+> A **I**nterface de **A**cesso **R**emoto a **L**aboratórios (**IARL**) é uma aplicação web que fornece uma interface amigável de acesso a arquivos e diretórios aos usuários dos LCCs (Laboratórios de Ciência da Computação).
 
 ## Documentação
 [Link para a documentação](https://guardians-dsc.github.io/iarl-nodejs/)
