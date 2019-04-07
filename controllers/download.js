@@ -14,7 +14,7 @@ async function _get (req, res, next) {
     return next(err);
   }
 
-  if (_isDirectory(path.resolve(root, userPath))) {
+  if (_isDirectory(absolutePath)) {
     res.set('Content-Type', 'application/zip');
     res.set('Content-Disposition', `attachment;filename=${path.basename(userPath)}.zip`);
     try {
