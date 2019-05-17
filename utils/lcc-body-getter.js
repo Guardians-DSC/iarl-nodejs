@@ -1,6 +1,6 @@
 module.exports = (req) => {
   if (process.env.NODE_DEV === 'development') {
-      return '';
+    return '';
   }  
   var lcc;
     switch (req.body.lcc) {
