@@ -2,10 +2,12 @@ const fs = require('fs');
 const config = require('config');
 const path = require('path');
 const archiveCreator = require('../utils/archive-creator');
+const lccGetter = require('../utils/lcc-body-getter');
 
 async function _get (req, res, next) {
+  const lcc = lccGetter(req)
   const userPath = req.query.path;
-  const root = path.join(config.get('baseDir'), req.user.username);
+  const root = path.join(config.get('baseDir') + lcc, req.user.username);
   const absolutePath = path.resolve(root, userPath);
 
   if (!userPath) {
