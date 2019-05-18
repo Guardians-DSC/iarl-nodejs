@@ -1,4 +1,8 @@
-module.exports = (req) => {
+module.exports = {
+    '1': 'lcc1',
+    '2': 'lcc2',
+    '3': 'lcc3'
+}
   if (process.env.NODE_DEV === 'development') {
     return '';
   }  
