@@ -1,7 +1,8 @@
-module.exports = function (app) {
-  var auth = app.middlewares.auth;
-  var downloadControl = app.controllers.download;
+const auth = require('../middlewares/auth');
+const pathResolver = require('../middlewares/pathResolver');
+const downloadsCtrl = require('../controllers/download');
 
+module.exports = app => {
   /**
    * @api {get} /api/download Downloads a file, a directory, or a set of them
    * @apiGroup Download
@@ -65,5 +66,5 @@ module.exports = function (app) {
    *    "error": "Invalid token"
    * }
    */
-  app.get('/api/download', auth, downloadControl.get);
+  app.get('/api/download', [auth, pathResolver], downloadsCtrl.get);
 };

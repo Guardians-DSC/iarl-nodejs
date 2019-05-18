@@ -1,6 +1,6 @@
-module.exports = (app) => {
-  var login = app.controllers.login;
+const loginCtrl = require('../controllers/login');
 
+module.exports = (app) => {
   /**
    * @api {post} /api/login Authenticate the user
    * @apiGroup Authenticate
@@ -31,5 +31,5 @@ module.exports = (app) => {
    *    "error": "Invalid Credentials"
    * }
    */
-  app.route('/api/login').post(login.login);
+  app.route('/api/login').post(loginCtrl.login);
 };

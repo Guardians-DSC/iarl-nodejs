@@ -1,32 +1,21 @@
 const fs = require('fs');
-const config = require('config');
 const path = require('path');
 const archiveCreator = require('../utils/archive-creator');
 
 async function _get (req, res, next) {
-  const lcc = config.get('lccsPaths')[req.headers.lcc];
-  const userPath = req.query.path;
-  const root = path.join(config.get('baseDir'), lcc, req.user.username);
-  const absolutePath = path.resolve(root, userPath);
-  if (!userPath) {
-    const err = new Error('Invalid request');
-    err.status = 422;
-    return next(err);
-  }
-
-  if (_isDirectory(absolutePath)) {
+  if (_isDirectory(req.user.providedPathResolved)) {
     res.set('Content-Type', 'application/zip');
-    res.set('Content-Disposition', `attachment;filename=${path.basename(userPath)}.zip`);
+    res.set('Content-Disposition', `attachment;filename=${path.basename(req.user.providedPathResolved)}.zip`);
     try {
       const archive = await archiveCreator();
       archive.pipe(res);
-      archive.directory(absolutePath, userPath);
+      archive.directory(req.user.providedPathResolved);
       archive.finalize();
     } catch (err) {
       next(err);
     }
   } else {
-    res.download(absolutePath);
+    res.download(req.user.providedPathResolved);
   }
 }
 

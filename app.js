@@ -10,10 +10,8 @@ require('./startup/parser')(app);
 require('./startup/cors')(app);
 require('./startup/production')(app);
 
-// auto-load modules
+// routes
 consign({ verbose: false })
-  .include('controllers')
-  .then('middlewares')
   .then('routes')
   .into(app);
 
