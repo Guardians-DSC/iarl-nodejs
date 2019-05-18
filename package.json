@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Design\"; standard; echo \"\nTests\"; mocha --timeout 10000 tests/*.test.js",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "start": "node app.js",
     "dev": "NODE_DEV=development DEBUG=app:* nodemon app.js"
   },
