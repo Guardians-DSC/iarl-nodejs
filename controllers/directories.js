@@ -1,13 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const config = require('config');
-const lccPath = require('../utils/lcc-path-getter');
 
 function _get (req, res, next) {
-  const lcc = lccPath(req.headers.lcc);
+  const lcc = config.get('lccsPaths')[req.headers.lcc];
   const relativePath = req.query.path || '';
   const absolutePath = path.resolve(config.get('baseDir'), lcc, req.user.username, relativePath);
-  const regex = new RegExp('^/home/' + req.user.username);
+  const regex = new RegExp(`^${req.user.path}`);
   if (!absolutePath.match(regex)) {
     const err = new Error('Unauthorized access');
     err.status = 403;

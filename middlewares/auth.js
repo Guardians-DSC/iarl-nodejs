@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const path = require('path');
 const config = require('config');
 
 const auth = function (req, res, next) {
@@ -12,6 +13,11 @@ const auth = function (req, res, next) {
   try {
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
     req.user = decoded;
+    req.user.path = path.join(
+      config.get('baseDir'),
+      config.get('lccsPaths')[req.headers.lcc],
+      req.user.username
+    );
     next();
   } catch (ex) {
     const err = new Error('Invalid token');
