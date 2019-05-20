@@ -1,3 +1,5 @@
+const errorDebug = require('debug')('app:error');
+
 module.exports = function (app) {
   // catch 404 and forward to error handler
   app.use(function (req, res, next) {
@@ -9,6 +11,7 @@ module.exports = function (app) {
   // error handler
   app.use(function (err, req, res, next) {
     res.status(err.status || 500);
+    errorDebug(err);
     res.json({ error: err.message });
   });
 };

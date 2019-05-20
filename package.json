@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Design\"; standard; echo \"\nTests\"; mocha --timeout 10000 tests/*.test.js",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "start": "node app.js",
-    "dev": "IARL_JWT_PRIVATE_KEY=1234 BASE_DIR=/home NODE_DEV=development nodemon app.js"
+    "dev": "NODE_DEV=development DEBUG=app:* nodemon app.js"
   },
   "engines": {
     "node": "8.11.2"

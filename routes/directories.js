@@ -1,7 +1,8 @@
-module.exports = function (app) {
-  var auth = app.middlewares.auth;
-  var directoriesREST = app.controllers.directories;
+const auth = require('../middlewares/auth');
+const pathResolver = require('../middlewares/pathResolver');
+const directoriesCtrl = require('../controllers/directories');
 
+module.exports = app => {
   /**
    * @api {get} /api/directories List items
    * @apiGroup Directories
@@ -55,5 +56,5 @@ module.exports = function (app) {
    * }
    *
    */
-  app.get('/api/directories', auth, directoriesREST.get);
+  app.get('/api/directories', [auth, pathResolver], directoriesCtrl.get);
 };
