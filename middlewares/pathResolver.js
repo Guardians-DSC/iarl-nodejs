@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
   const providedPath = req.query.path || '';
   const absolutePath = path.resolve(userRootPath, providedPath);
 
-  const userOriginPathRegex = new RegExp(`^${userRootPath}`);
+  const userOriginPathRegex = new RegExp(`${userRootPath}`);
   if (!absolutePath.match(userOriginPathRegex)) {
     const err = new Error('Unauthorized access');
     err.status = 403;
