@@ -9,6 +9,14 @@ module.exports = (req, res, next) => {
     return next(err);
   }
 
+  const parts = authHeader.split(' ');
+
+  const [scheme, token] = parts;
+
+  if (!/^Bearer$/i.test(scheme) || !parts.length === 2) {
+    return res.status(401).send({ error: 'Token Malformatted' });
+  }
+
   try {
     const decoded = jwt.verify(token, config.get('jwtPrivateKey'));
     req.user = decoded;
