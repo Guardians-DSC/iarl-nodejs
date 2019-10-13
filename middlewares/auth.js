@@ -11,13 +11,9 @@ module.exports = (req, res, next) => {
 
   const parts = authHeader.split(' ');
 
-  if (!parts.length === 2) {
-    return res.status(401).send({ error: 'Token error' });
-  }
-
   const [scheme, token] = parts;
 
-  if (!/^Bearer$/i.test(scheme)) {
+  if (!/^Bearer$/i.test(scheme) || !parts.length === 2) {
     return res.status(401).send({ error: 'Token Malformatted' });
   }
 
