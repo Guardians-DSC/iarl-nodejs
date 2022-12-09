@@ -33,7 +33,7 @@
     "config": "^1.30.0",
     "consign": "^0.1.6",
     "cors": "^2.8.4",
-    "express": "~4.16.0",
+    "express": "~4.17.3",
     "helmet": "^3.13.0",
     "jsonwebtoken": "^8.2.1",
     "ldapjs": "^1.0.2",
